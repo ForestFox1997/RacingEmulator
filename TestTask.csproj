@@ -53,7 +53,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RasingLogic\Vehicle.cs" />
+    <Compile Include="RacingLogic\Colors.cs" />
+    <Compile Include="RacingLogic\Racing.cs" />
+    <Compile Include="RacingLogic\Service.cs" />
+    <Compile Include="RacingLogic\Vehicle.cs" />
+    <Compile Include="RacingLogic\VehiclesLogic.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

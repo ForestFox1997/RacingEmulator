@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,5 +47,16 @@ namespace TestTask.RasingLogic
         }
         private double _wheelPunctureProbability;
 
+        public string 
+
+        ///// <summary> Цвет автомобиля </summary>
+        //struct VehicleColor
+        //{
+        //    /// <summary> Название цвета </summary>
+        //    public string ColorName { get; set; }
+
+        //    /// <summary> Цвет </summary>
+        //    public Color Color { get; set; }
+        //}
     }
 }
