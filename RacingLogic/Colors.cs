@@ -9,7 +9,8 @@ namespace TestTask.RacingLogic
 {
     static class Colors
     {
-        enum ColorEnumeration
+        /// <summary> Варианты цветов </summary>
+        public enum ColorEnumeration
         {
             /// <summary> Красный </summary>
             Red,
@@ -37,12 +38,20 @@ namespace TestTask.RacingLogic
             Gray
         }
 
-        public static Color GetColor(ColorEnumeration colorEnumeration)
-        {
+        /// <summary> Получить цвет по его названию </summary>
+        public static Color GetColor(ColorEnumeration colorEnumeration) => _colorValues[colorEnumeration];
 
-        }
+        /// <summary> Полчить список возможных цветов автомобиля </summary>
+        public static Dictionary<ColorEnumeration, Color> GetVehicleColors() => _colorValues;
 
-
-
+        /// <summary> Словарь цветов и их названий </summary>
+        private static Dictionary<ColorEnumeration, Color> _colorValues = new Dictionary<ColorEnumeration, Color> {
+            { ColorEnumeration.Red, Color.FromArgb(255, 0, 0) }, { ColorEnumeration.Pink, Color.FromArgb(255, 192, 203) },
+            { ColorEnumeration.Orange, Color.FromArgb(255, 165, 0) }, { ColorEnumeration.Yellow, Color.FromArgb(255, 255, 0) },
+            { ColorEnumeration.Lavender, Color.FromArgb(230, 230, 250) }, { ColorEnumeration.Maroon, Color.FromArgb(128, 0, 0) },
+            { ColorEnumeration.Lime, Color.FromArgb(0, 255, 0) }, { ColorEnumeration.Green, Color.FromArgb(0, 128, 0) },
+            { ColorEnumeration.Olive, Color.FromArgb(128, 128, 0) }, { ColorEnumeration.Blue, Color.FromArgb(0, 0, 255) },
+            { ColorEnumeration.LightBlue, Color.FromArgb(173, 216, 230) }, { ColorEnumeration.Gray, Color.FromArgb(128, 128, 128) }
+        };
     }
 }

@@ -13,7 +13,7 @@ namespace TestTask.RacingLogic
 
         VehiclesLogic()
         {
-            _
+            
 
 
         }

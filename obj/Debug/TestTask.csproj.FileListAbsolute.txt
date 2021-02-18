@@ -1,0 +1,10 @@
+C:\Users\Артём\Documents\GitHub\RacingEmulator\bin\Debug\TestTask.exe.config
+C:\Users\Артём\Documents\GitHub\RacingEmulator\bin\Debug\TestTask.exe
+C:\Users\Артём\Documents\GitHub\RacingEmulator\bin\Debug\TestTask.pdb
+C:\Users\Артём\Documents\GitHub\RacingEmulator\obj\Debug\TestTask.csprojAssemblyReference.cache
+C:\Users\Артём\Documents\GitHub\RacingEmulator\obj\Debug\TestTask.MainForm.resources
+C:\Users\Артём\Documents\GitHub\RacingEmulator\obj\Debug\TestTask.Properties.Resources.resources
+C:\Users\Артём\Documents\GitHub\RacingEmulator\obj\Debug\TestTask.csproj.GenerateResource.cache
+C:\Users\Артём\Documents\GitHub\RacingEmulator\obj\Debug\TestTask.csproj.CoreCompileInputs.cache
+C:\Users\Артём\Documents\GitHub\RacingEmulator\obj\Debug\TestTask.exe
+C:\Users\Артём\Documents\GitHub\RacingEmulator\obj\Debug\TestTask.pdb

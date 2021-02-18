@@ -4,17 +4,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static TestTask.RacingLogic.Colors;
 
-namespace TestTask.RasingLogic
+namespace TestTask.RacingLogic
 {
     /// <summary> Класс транспортного средства, учавствующего в гонке </summary>
     class Vehicle
     {
-        public Vehicle(VehicleType vehicleType, int vehicleSpeed, double wheelPunctureProbability)
+        public Vehicle(VehicleType vehicleType, int vehicleSpeed, double wheelPunctureProbability, ColorEnumeration venicleColor)
         {
             TypeOfVehicle = vehicleType;
             VehicleSpeed = vehicleSpeed;
             WheelPunctureProbability = wheelPunctureProbability;
+            VehicleColor = venicleColor;
+            VehicleColorName = venicleColor.ToString();
         }
 
         /// <summary> Тип транспортного средства </summary>
@@ -35,7 +38,7 @@ namespace TestTask.RasingLogic
         public int VehicleSpeed { get; set; }
 
         /// <summary> Вероятность прокола колеса, в диапозоне от 0 до 1 </summary>
-        public double WheelPunctureProbability 
+        public double WheelPunctureProbability
         {
             get => _wheelPunctureProbability;
             set
@@ -47,16 +50,31 @@ namespace TestTask.RasingLogic
         }
         private double _wheelPunctureProbability;
 
-        public string 
+        public ColorEnumeration VehicleColor { get; set; }
 
-        ///// <summary> Цвет автомобиля </summary>
-        //struct VehicleColor
-        //{
-        //    /// <summary> Название цвета </summary>
-        //    public string ColorName { get; set; }
+        public string VehicleColorName { get; set; }
 
-        //    /// <summary> Цвет </summary>
-        //    public Color Color { get; set; }
-        //}
+        public double RemainingDistanceToFinish
+        {
+            get => _remainingDistanceToFinish;
+            set => _remainingDistanceToFinish = _remainingDistanceToFinish - value < 0 
+                ? 0 
+                : _remainingDistanceToFinish - value;
+        }
+        private double _remainingDistanceToFinish;
+
+        public double Downtime { get; set; }
+
+        public override string ToString()
+        {
+            string vehicleType = string.Empty;
+            if (TypeOfVehicle == VehicleType.Truck)
+                vehicleType = "Грузовик";
+            else if (TypeOfVehicle == VehicleType.PassengerCar)
+                vehicleType = "Легковое авто";
+            else if (TypeOfVehicle == VehicleType.Motorcycle)
+                vehicleType = "Мотоцикл";
+            return vehicleType + ", " + VehicleColorName + ", " + VehicleSpeed + " / " + WheelPunctureProbability;
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestTask.RasingLogic
+namespace TestTask.RacingLogic
 {
     static class Service
     {
