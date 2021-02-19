@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drawing.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,8 +57,8 @@
     <Compile Include="RacingLogic\Colors.cs" />
     <Compile Include="RacingLogic\Racing.cs" />
     <Compile Include="RacingLogic\Service.cs" />
+    <Compile Include="RacingLogic\Statistics.cs" />
     <Compile Include="RacingLogic\Vehicle.cs" />
-    <Compile Include="RacingLogic\VehiclesLogic.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

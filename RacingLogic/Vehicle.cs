@@ -15,7 +15,7 @@ namespace TestTask.RacingLogic
         {
             TypeOfVehicle = vehicleType;
             VehicleSpeed = vehicleSpeed;
-            WheelPunctureProbability = wheelPunctureProbability;
+            LuckRate = wheelPunctureProbability;
             VehicleColor = venicleColor;
             VehicleColorName = venicleColor.ToString();
         }
@@ -38,32 +38,50 @@ namespace TestTask.RacingLogic
         public int VehicleSpeed { get; set; }
 
         /// <summary> Вероятность прокола колеса, в диапозоне от 0 до 1 </summary>
-        public double WheelPunctureProbability
+        public double LuckRate
         {
-            get => _wheelPunctureProbability;
-            set
-            {
-                if (value > 1 || value < 0)
-                    throw new Exception("Вероятность прокола колеса должна быть вещественным числом в диапозоне от 0 до 1");
-                _wheelPunctureProbability = value;
-            }
+            get => _luckRate;
+            set => _luckRate = value > 1 || value < 0
+                ? throw new Exception("Коэффициент удачи должен быть вещественным числом в диапозоне от 0 до 1")
+                : value;
         }
-        private double _wheelPunctureProbability;
+        private double _luckRate;
 
         public ColorEnumeration VehicleColor { get; set; }
 
         public string VehicleColorName { get; set; }
 
+        public void SetDistanceToFinish(double distance) => _remainingDistanceToFinish = distance;
         public double RemainingDistanceToFinish
         {
             get => _remainingDistanceToFinish;
-            set => _remainingDistanceToFinish = _remainingDistanceToFinish - value < 0 
-                ? 0 
-                : _remainingDistanceToFinish - value;
+            set => _remainingDistanceToFinish = value < 0 ? 0 : value;
         }
         private double _remainingDistanceToFinish;
 
-        public double Downtime { get; set; }
+        /// <summary> Количество проклов шины </summary>
+        public int CountOfTirePunctures { get; set; }
+
+        /// <summary> Количество едениц времени, затраченных на гонку </summary>
+        public double CountOfTimeUnits { get; set; }
+
+        public void SetDowntime(double time) 
+        {
+            if (time <= 0)
+            {
+                _downtime = 0;
+                CountOfTirePunctures++;
+            }
+            else
+                _downtime = time;
+        }
+        public double GetDowntime() => _downtime;
+        //public int Downtime
+        //{
+        //    get => _downtime;
+        //    set => _downtime = _downtime - value < 0 ? 0 : _downtime - value;
+        //}
+        private double _downtime;
 
         public override string ToString()
         {
@@ -74,7 +92,7 @@ namespace TestTask.RacingLogic
                 vehicleType = "Легковое авто";
             else if (TypeOfVehicle == VehicleType.Motorcycle)
                 vehicleType = "Мотоцикл";
-            return vehicleType + ", " + VehicleColorName + ", " + VehicleSpeed + " / " + WheelPunctureProbability;
+            return vehicleType + ", " + VehicleColorName + ", " + VehicleSpeed + " / " + LuckRate;
         }
     }
 }

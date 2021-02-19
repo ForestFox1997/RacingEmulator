@@ -109,9 +109,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(16, 162);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(140, 13);
+            this.label5.Size = new System.Drawing.Size(108, 13);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Вероятность прокола шин";
+            this.label5.Text = "Коэффициент удачи";
             // 
             // label4
             // 
@@ -212,6 +212,7 @@
             this.btnGo.TabIndex = 7;
             this.btnGo.Text = "поїхали";
             this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // textBox1
             // 

@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 using TestTask.RacingLogic;
 using static TestTask.RacingLogic.Colors;
@@ -18,7 +20,22 @@ namespace TestTask
         public MainForm()
         {
             InitializeComponent();
+
+            var timer = new System.Timers.Timer(1000);
+            //timer.Elapsed += Timer_Elapsed;
+
+
+
+        }
+
+        private void Timer_Elapsed()
+        {
             
+        }
+
+        private void SomeVoid()
+        {
+
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -71,6 +88,33 @@ namespace TestTask
         {
             btnRemoveVehicle.Enabled = vehicles.Count > 0;
             btnAddVehicle.Enabled = vehicles.Count < 12;
+        }
+
+        private async void btnGo_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() => {
+                if (vehicles.Count != 0)
+                {
+                    var raceCondition = new RaceCondition();
+                    raceCondition.RaceConditionIsChanged += DisplayChangedRaceCondition;
+                    raceCondition.StartRace();
+                    textBox1.Invoke((MethodInvoker)delegate { textBox1.Text += "Гонка завершена!"; });
+                }
+
+            });
+
+        }
+
+        private void DisplayChangedRaceCondition()
+        {
+
+            var currentCondition = vehicles;
+            
+            textBox1.Invoke((MethodInvoker)async delegate {
+                //await Task.Delay(1000);
+                textBox1.Text += vehicles[0].RemainingDistanceToFinish + Environment.NewLine;
+            });
+
         }
     }
 }
