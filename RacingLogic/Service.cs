@@ -16,7 +16,22 @@ namespace TestTask.RacingLogic
 
         public static double GetRandomRealValue() => _random.NextDouble();
 
+        /// <summary> Параметры моделирования </summary>
+        public static class Parameters
+        {
+            /// <summary> Количество едениц расстояния </summary>
+            public static int DistanceUnits { get; set; }
 
+            /// <summary> Минимальное количество едениц времени для замены колеса </summary>
+            public static int MinimumTimeToChangeWheel { get; set; }
+
+            /// <summary> Минимальное количество едениц времени для замены колеса </summary>
+            public static int MaximumTimeToChangeWheel { get; set; }
+
+            /// <summary> Скорость моделирования по отношению к реальному времени </summary>
+            public static int SimulationSpeed { get; set; }
+
+        }
 
 
 

@@ -43,9 +43,24 @@
             this.btnRemoveVehicle = new System.Windows.Forms.Button();
             this.btnGo = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.nudMaxTimeToChangeWheel = new System.Windows.Forms.NumericUpDown();
+            this.nudMinTimeToChangeWheel = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nudDistance = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nudSimulationSpeed = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelPunctureProbability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVehicleSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxTimeToChangeWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinTimeToChangeWheel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSimulationSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -78,7 +93,7 @@
             this.groupBox1.Controls.Add(this.btnAddVehicle);
             this.groupBox1.Location = new System.Drawing.Point(25, 351);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 283);
+            this.groupBox1.Size = new System.Drawing.Size(206, 264);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Добавить транспортное средство";
@@ -206,7 +221,7 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(497, 130);
+            this.btnGo.Location = new System.Drawing.Point(622, 523);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(135, 29);
             this.btnGo.TabIndex = 7;
@@ -216,24 +231,185 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(380, 228);
+            this.textBox1.Location = new System.Drawing.Point(266, 607);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(414, 336);
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(854, 196);
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = "Для вывода результатов!\r\n\r\n";
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox.Location = new System.Drawing.Point(299, 17);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(800, 480);
+            this.pictureBox.TabIndex = 9;
+            this.pictureBox.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.nudSimulationSpeed);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.nudMaxTimeToChangeWheel);
+            this.groupBox2.Controls.Add(this.nudMinTimeToChangeWheel);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.nudDistance);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Location = new System.Drawing.Point(25, 633);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 239);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Параметры моделирования";
+            // 
+            // nudMaxTimeToChangeWheel
+            // 
+            this.nudMaxTimeToChangeWheel.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudMaxTimeToChangeWheel.Location = new System.Drawing.Point(98, 112);
+            this.nudMaxTimeToChangeWheel.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudMaxTimeToChangeWheel.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudMaxTimeToChangeWheel.Name = "nudMaxTimeToChangeWheel";
+            this.nudMaxTimeToChangeWheel.Size = new System.Drawing.Size(73, 20);
+            this.nudMaxTimeToChangeWheel.TabIndex = 14;
+            this.nudMaxTimeToChangeWheel.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.nudMaxTimeToChangeWheel.ValueChanged += new System.EventHandler(this.TimeToChangeWheel_ValueChanged);
+            // 
+            // nudMinTimeToChangeWheel
+            // 
+            this.nudMinTimeToChangeWheel.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudMinTimeToChangeWheel.Location = new System.Drawing.Point(16, 112);
+            this.nudMinTimeToChangeWheel.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudMinTimeToChangeWheel.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudMinTimeToChangeWheel.Name = "nudMinTimeToChangeWheel";
+            this.nudMinTimeToChangeWheel.Size = new System.Drawing.Size(73, 20);
+            this.nudMinTimeToChangeWheel.TabIndex = 13;
+            this.nudMinTimeToChangeWheel.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.nudMinTimeToChangeWheel.ValueChanged += new System.EventHandler(this.TimeToChangeWheel_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(173, 39);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Минимальное и максимальное \r\nколичество едениц времени, \r\nкоторое уйдет на замену" +
+    " колеса\r\n";
+            // 
+            // nudDistance
+            // 
+            this.nudDistance.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudDistance.Location = new System.Drawing.Point(16, 36);
+            this.nudDistance.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudDistance.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudDistance.Name = "nudDistance";
+            this.nudDistance.Size = new System.Drawing.Size(120, 20);
+            this.nudDistance.TabIndex = 12;
+            this.nudDistance.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudDistance.ValueChanged += new System.EventHandler(this.nudDistance_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(13, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(94, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Дистанция круга";
+            // 
+            // nudSimulationSpeed
+            // 
+            this.nudSimulationSpeed.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudSimulationSpeed.Location = new System.Drawing.Point(16, 173);
+            this.nudSimulationSpeed.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudSimulationSpeed.Name = "nudSimulationSpeed";
+            this.nudSimulationSpeed.Size = new System.Drawing.Size(120, 20);
+            this.nudSimulationSpeed.TabIndex = 16;
+            this.nudSimulationSpeed.ValueChanged += new System.EventHandler(this.nudSimulationSpeed_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(13, 144);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(151, 26);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Коэффициент замедления \r\nскорости моделирования, %";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 696);
+            this.ClientSize = new System.Drawing.Size(1150, 909);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnRemoveVehicle);
             this.Controls.Add(this.lbVehicles);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.pictureBox);
             this.Name = "MainForm";
             this.Text = "Main Form";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -241,6 +417,13 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelPunctureProbability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVehicleSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxTimeToChangeWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinTimeToChangeWheel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSimulationSpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,6 +445,15 @@
         private System.Windows.Forms.ComboBox cbVehicleTypes;
         private System.Windows.Forms.Button btnGo;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown nudDistance;
+        private System.Windows.Forms.NumericUpDown nudMaxTimeToChangeWheel;
+        private System.Windows.Forms.NumericUpDown nudMinTimeToChangeWheel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nudSimulationSpeed;
+        private System.Windows.Forms.Label label8;
     }
 }
 

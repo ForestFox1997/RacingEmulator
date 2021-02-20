@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using TestTask.RacingLogic;
 using static TestTask.RacingLogic.Colors;
 using static TestTask.RacingLogic.Racing;
+using static TestTask.RacingLogic.Service;
 
 namespace TestTask
 {
@@ -20,48 +21,25 @@ namespace TestTask
         public MainForm()
         {
             InitializeComponent();
-
-            var timer = new System.Timers.Timer(1000);
-            //timer.Elapsed += Timer_Elapsed;
-
-
-
         }
 
-        private void Timer_Elapsed()
-        {
-            
-        }
-
-        private void SomeVoid()
-        {
-
-        }
+        private Picture picture = new Picture();
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             var venicleColorsDictionary = GetVehicleColors();
-            //TODO Доделать (?)
-            //cbVehicleColors.DrawMode = DrawMode.OwnerDrawFixed;
-            //cbVehicleColors.DrawItem += (_sender, _e) => {
-            //    _e.DrawBackground();
-            //    var graphics = _e.Graphics;
-
-            //    var индекс = (int)cbVehicleColors.Items[_e.Index];
-
-            //    graphics.FillRectangle(new SolidBrush(venicleColorsDictionary[ColorEnumeration.Blue]), _e.Bounds);
-            //    _e.DrawFocusRectangle();
-            //};
             foreach (var venicleColor in venicleColorsDictionary)
-            {
                 cbVehicleColors.Items.Add(venicleColor.Key);
-            }
             cbVehicleColors.SelectedIndex = 0;
 
-
-
             cbVehicleTypes.SelectedIndex = 0;
+
             lbVehicles.DataSource = new BindingSource().DataSource = vehicles;
+            
+            Parameters.DistanceUnits = (int)nudDistance.Value;
+            Parameters.MinimumTimeToChangeWheel = (int)nudMinTimeToChangeWheel.Value;
+            Parameters.MaximumTimeToChangeWheel = (int)nudMaxTimeToChangeWheel.Value;
+            Parameters.SimulationSpeed = (int)nudSimulationSpeed.Value;
         }
 
         private void btnRemoveVehicle_Click(object sender, EventArgs e)
@@ -92,17 +70,19 @@ namespace TestTask
 
         private async void btnGo_Click(object sender, EventArgs e)
         {
+            textBox1.Text += Statistics.GetResult(Statistics.RaceCondition.start);
             await Task.Run(() => {
                 if (vehicles.Count != 0)
                 {
                     var raceCondition = new RaceCondition();
                     raceCondition.RaceConditionIsChanged += DisplayChangedRaceCondition;
                     raceCondition.StartRace();
+
                     textBox1.Invoke((MethodInvoker)delegate { textBox1.Text += "Гонка завершена!"; });
                 }
 
             });
-
+            
         }
 
         private void DisplayChangedRaceCondition()
@@ -110,11 +90,37 @@ namespace TestTask
 
             var currentCondition = vehicles;
             
-            textBox1.Invoke((MethodInvoker)async delegate {
-                //await Task.Delay(1000);
-                textBox1.Text += vehicles[0].RemainingDistanceToFinish + Environment.NewLine;
+            textBox1.Invoke((MethodInvoker)delegate {
+                string condition = Statistics.GetResult(Statistics.RaceCondition.continues);
+                textBox1.Text += condition + Environment.NewLine;
+                //textBox1.Text += vehicles[0].RemainingDistanceToFinish + Environment.NewLine;
+
+                pictureBox.Invoke((MethodInvoker)delegate { picture.DrawPicture(pictureBox); });
             });
 
         }
+
+        #region Настройка параметров
+        private void TimeToChangeWheel_ValueChanged(object sender, EventArgs e)
+        {
+            if (nudMinTimeToChangeWheel.Value > nudMaxTimeToChangeWheel.Value)
+                if (((NumericUpDown)sender).Name == "nudMinTimeToChangeWheel")
+                    nudMaxTimeToChangeWheel.Value = nudMinTimeToChangeWheel.Value;
+                else
+                    nudMinTimeToChangeWheel.Value = nudMaxTimeToChangeWheel.Value;
+            Parameters.MinimumTimeToChangeWheel = (int)nudMinTimeToChangeWheel.Value;
+            Parameters.MaximumTimeToChangeWheel = (int)nudMaxTimeToChangeWheel.Value;
+        }
+
+        private void nudSimulationSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            Parameters.SimulationSpeed = (int)nudSimulationSpeed.Value;
+        }
+
+        private void nudDistance_ValueChanged(object sender, EventArgs e)
+        {
+            Parameters.DistanceUnits = (int)nudDistance.Value;
+        }
+        #endregion Настройка параметров
     }
 }

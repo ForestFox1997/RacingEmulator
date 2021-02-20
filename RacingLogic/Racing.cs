@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static TestTask.RacingLogic.Service;
 
 namespace TestTask.RacingLogic
 {
@@ -27,13 +28,15 @@ namespace TestTask.RacingLogic
                 foreach (Vehicle vehicle in vehicles)
                 {
                     //---------- Установить расстояние до финиша
-                    vehicle.SetDistanceToFinish(10000);
-                    //---------- Установить количество проколов шин равным нулю
+                    vehicle.SetDistanceToFinish(Parameters.DistanceUnits);
+                    //---------- Установить количество проколов шин
                     vehicle.CountOfTirePunctures = 0;
+                    //---------- Установить количество прошедшего времени гонки
+                    vehicle.CountOfTimeUnits = 0;
                 }
                 while (EveryoneAtFinishLine == false)
                 {
-                    CalculateMomentOfRace(1);
+                    CalculateMomentOfRace();
                     RaceConditionIsChanged();
                 }
                 RaceConditionIsChanged();
@@ -53,8 +56,7 @@ namespace TestTask.RacingLogic
         }
 
         /// <summary> Расчитать момент времени гонки для каждого ТС </summary>
-        /// <param name="speedRatio"> Коэффициент скорость расчета по отношению к реальному времени </param>
-        private static void CalculateMomentOfRace(double speedRatio)
+        private static void CalculateMomentOfRace()
         {
 
             /* Пусть размер круга - 10000 едениц расстояния;
@@ -80,29 +82,35 @@ namespace TestTask.RacingLogic
                     remainingTimeRatio = 1 - (vehicle.GetDowntime() / 100);
                     vehicle.SetDowntime(vehicle.GetDowntime() - 100);
                 }
-                
+
                 //---------- Если в текущем моменте времени у ТС есть время для движения
                 if (remainingTimeRatio > 0)
+                {
                     //---------- Посчитать, сколько оно проедет за текущий момент времени, учитывая затраты на смену колеса
                     vehicle.RemainingDistanceToFinish -= vehicle.VehicleSpeed * remainingTimeRatio;
+                    //---------- Увеличить счетчик времени, затраченного на гонку с учетом затрат времени на смену колеса
+                    vehicle.CountOfTimeUnits += vehicle.VehicleSpeed * remainingTimeRatio;
+                }
 
                 //---------- Если колесо ТС не проколото
                 if (vehicle.GetDowntime() == 0)
                 {
                     //---------- Расчитать вероятность прокола колеса на каждом моменте времени
-                    double chance = (1 - vehicle.LuckRate) / (10000 / vehicle.VehicleSpeed);
+                    double chance = (1 - vehicle.LuckRate) / (Parameters.DistanceUnits / vehicle.VehicleSpeed);
                     //---------- Расчет того, будет ли пробито колесо ТС в текущий момент времени гонки
-                    bool puncture = Service.GetRandomRealValue() < chance;
+                    bool puncture = GetRandomRealValue() < chance;
                     //---------- Если колесо было пробито
                     if (puncture)
                         //---------- Сгенерировать время, которое уйдет на смену колеса ТС
-                        vehicle.SetDowntime(Service.GetRandomIntegerValue(100, 200));
+                        vehicle.SetDowntime(GetRandomIntegerValue(
+                            Parameters.MinimumTimeToChangeWheel, Parameters.MaximumTimeToChangeWheel));
                 }
             }
 
+            // Коэффициент замедления, по отношению к реальному времени
+            double percent = (double)Parameters.SimulationSpeed / 100;
             // Произвести задержку, в зависимости от соотношения времени гонки к реальному времени
-            int delay = Convert.ToInt32(speedRatio * 100);
-            //await Task.Delay(delay);
+            int delay = Convert.ToInt32(100 + (100 * percent));
             Thread.Sleep(delay);
         }
 
