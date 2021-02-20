@@ -33,7 +33,7 @@ namespace TestTask
             //---------- Инструменты отрисовки
             Graphics graphics = Graphics.FromImage(pictureBox.Image);
             Pen pen = new Pen(Color.Black) { Width = (int)(PictureHeight * 0.01) };
-            SolidBrush solidBrush = new SolidBrush(Color.White);
+            SolidBrush solidBrush = new SolidBrush(Color.NavajoWhite);
 
             //---------- Залить полотно изображения
             graphics.FillRectangle(solidBrush, dx, dy, PictureWidth, PictureHeight);
@@ -46,11 +46,18 @@ namespace TestTask
             }
 
             //---------- Отрисовать финишную черту
-            for (int i = 0; i < 2; i++)
+            for (double y = 0; y < PictureHeight; y += PictureHeight * 0.025)
             {
-                int width = (int)(PictureWidth * 0.05);
-
-
+                solidBrush.Color = solidBrush.Color == Color.White ? Color.Black : Color.White;
+                graphics.FillRectangle(solidBrush, (float)(PictureWidth - (PictureHeight * 0.025)),
+                    (float)y, (float)(PictureHeight * 0.025), (float)(PictureHeight * 0.025));
+            }
+            solidBrush.Color = Color.White;
+            for (double y = 0; y < PictureHeight; y += PictureHeight * 0.025)
+            {
+                solidBrush.Color = solidBrush.Color == Color.Black ? Color.White : Color.Black;
+                graphics.FillRectangle(solidBrush, (float)(PictureWidth - (PictureHeight * 0.05)),
+                    (float)y, (float)(PictureHeight * 0.025), (float)(PictureHeight * 0.025));
             }
 
             //---------- Отрисовать ТС на линии движения
@@ -59,12 +66,13 @@ namespace TestTask
                 double distanceCompleted = percentageOfDistanceTraveled[i];
                 Color vehicleColor = GetColor(vehicles[i].VehicleColor);
                 int x = (int)(PictureWidth * distanceCompleted / 100);
-                //if (x - )
                 int y = (PictureHeight / (vehicles.Count + 1) * (i + 1)) - (int)(PictureHeight * 0.025);
                 solidBrush.Color = vehicleColor;
                 int squareSize = (int)(PictureHeight * 0.05);
                 if (x > (x - squareSize))
                     x -= squareSize;
+                if (x < 0)
+                    x = 0;
                 graphics.FillRectangle(solidBrush, x, y, squareSize, squareSize);
             }
 
