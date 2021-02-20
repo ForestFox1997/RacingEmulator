@@ -79,11 +79,6 @@ namespace TestTask.RacingLogic
                 _downtime = time;
         }
         public double GetDowntime() => _downtime;
-        //public int Downtime
-        //{
-        //    get => _downtime;
-        //    set => _downtime = _downtime - value < 0 ? 0 : _downtime - value;
-        //}
         private double _downtime;
 
         public override string ToString()
@@ -105,7 +100,6 @@ namespace TestTask.RacingLogic
                 vehicleType = "Мотоцикл";
                 additionalParemeter = Convert.ToBoolean(AdditionalParameter) ? " Имеет коляску" : " Не имеет коляски";
             }
-
             return vehicleType + ", " + VehicleColorName + ", " + VehicleSpeed + " / " + LuckRate + "," + additionalParemeter;
         }
     }

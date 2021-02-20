@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReport.Designer.cs">
+      <DependentUpon>FormReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Picture.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -59,6 +65,9 @@
     <Compile Include="RacingLogic\Service.cs" />
     <Compile Include="RacingLogic\Statistics.cs" />
     <Compile Include="RacingLogic\Vehicle.cs" />
+    <EmbeddedResource Include="FormReport.resx">
+      <DependentUpon>FormReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>

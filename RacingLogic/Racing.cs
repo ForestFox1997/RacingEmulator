@@ -58,12 +58,6 @@ namespace TestTask.RacingLogic
         /// <summary> Расчитать момент времени гонки для каждого ТС </summary>
         private static void CalculateMomentOfRace()
         {
-
-            /* Пусть размер круга - 10000 едениц расстояния;
-             * Пусть 100 едениц скорости движения ТС проходятся примерно за 100 миллесекунд при коэффициенте ускорения 1;
-             * Пусть время замены одного проколотого колеса занимает от 100 до 200 едениц времени; 
-            */ 
-
             // Расчитать, какое расстояние преодолело каждое ТС за текущий момент гонки
             for (int i = 0; i < vehicles.Count; i++)
             {
@@ -80,7 +74,7 @@ namespace TestTask.RacingLogic
                 if (vehicle.GetDowntime() > 0)
                 {
                     remainingTimeRatio = 1 - (vehicle.GetDowntime() / 100);
-                    vehicle.SetDowntime(vehicle.GetDowntime() - 100);
+                    vehicle.SetDowntime(vehicle.GetDowntime() - Parameters.DistanceUnits / 100);
                 }
 
                 //---------- Если в текущем моменте времени у ТС есть время для движения
@@ -91,6 +85,9 @@ namespace TestTask.RacingLogic
                     //---------- Увеличить счетчик времени, затраченного на гонку с учетом затрат времени на смену колеса
                     vehicle.CountOfTimeUnits += vehicle.VehicleSpeed * remainingTimeRatio;
                 }
+                else
+                    vehicle.CountOfTimeUnits += vehicle.VehicleSpeed;
+                
 
                 //---------- Если колесо ТС не проколото
                 if (vehicle.GetDowntime() == 0)
@@ -106,13 +103,11 @@ namespace TestTask.RacingLogic
                             Parameters.MinimumTimeToChangeWheel, Parameters.MaximumTimeToChangeWheel));
                 }
             }
-
             // Коэффициент замедления, по отношению к реальному времени
             double percent = (double)Parameters.SimulationSpeed / 100;
             // Произвести задержку, в зависимости от соотношения времени гонки к реальному времени
             int delay = Convert.ToInt32(100 + (100 * percent));
             Thread.Sleep(delay);
         }
-
     }
 }

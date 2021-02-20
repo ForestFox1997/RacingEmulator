@@ -31,11 +31,8 @@ namespace TestTask
             foreach (var venicleColor in venicleColorsDictionary)
                 cbVehicleColors.Items.Add(venicleColor.Key);
             cbVehicleColors.SelectedIndex = 0;
-
             cbVehicleTypes.SelectedIndex = 0;
-
             lbVehicles.DataSource = new BindingSource().DataSource = vehicles;
-            
             Parameters.DistanceUnits = (int)nudDistance.Value;
             Parameters.MinimumTimeToChangeWheel = (int)nudMinTimeToChangeWheel.Value;
             Parameters.MaximumTimeToChangeWheel = (int)nudMaxTimeToChangeWheel.Value;
@@ -90,7 +87,6 @@ namespace TestTask
                     var raceCondition = new RaceCondition();
                     raceCondition.RaceConditionIsChanged += DisplayChangedRaceCondition;
                     raceCondition.StartRace();
-
                     tbRacingStats.Invoke((MethodInvoker)delegate { tbRacingStats.Text += "Гонка завершена!"; });
                     Invoke((MethodInvoker)delegate {
                         nudDistance.Enabled = true;
@@ -99,27 +95,20 @@ namespace TestTask
                         btnAddVehicle.Enabled = true;
                     });
                 }
-
             });
-            
+            DisplayReport();
         }
 
         private void DisplayChangedRaceCondition()
         {
-
             var currentCondition = vehicles;
-            
             tbRacingStats.Invoke((MethodInvoker)delegate {
                 string condition = Statistics.GetResult(Statistics.RaceCondition.continues);
                 tbRacingStats.Text = condition + Environment.NewLine;
-                //textBox1.Text += vehicles[0].RemainingDistanceToFinish + Environment.NewLine;
-
                 pictureBox.Invoke((MethodInvoker)delegate { picture.DrawPicture(pictureBox); });
             });
-
         }
-
-        #region Настройка параметров
+        
         private void TimeToChangeWheel_ValueChanged(object sender, EventArgs e)
         {
             if (nudMinTimeToChangeWheel.Value > nudMaxTimeToChangeWheel.Value)
@@ -140,7 +129,6 @@ namespace TestTask
         {
             Parameters.DistanceUnits = (int)nudDistance.Value;
         }
-        #endregion Настройка параметров
 
         private void cbVehicleTypes_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -165,6 +153,15 @@ namespace TestTask
                 nudPeopleCount.Visible = false;
                 cbSidecarAvailability.Visible = true;
             }
+        }
+
+        private void DisplayReport()
+        {
+            if (vehicles.Count == 0)
+                return;
+            var formReport = new FormReport();
+            if (formReport.ShowDialog() == DialogResult.OK)
+                btnGo_Click(formReport, new EventArgs());
         }
     }
 }

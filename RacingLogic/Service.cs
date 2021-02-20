@@ -30,8 +30,6 @@ namespace TestTask.RacingLogic
 
             /// <summary> Скорость моделирования по отношению к реальному времени </summary>
             public static int SimulationSpeed { get; set; }
-
         }
-
     }
 }

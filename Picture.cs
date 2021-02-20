@@ -19,7 +19,8 @@ namespace TestTask
             PictureHeight = pictureBox.Height;
             percentageOfDistanceTraveled = 
                 (from vehicle in vehicles select (100 - (vehicle.RemainingDistanceToFinish / Parameters.DistanceUnits * 100))).ToList();
-            pictureBox.Image = new Bitmap(PictureWidth, PictureHeight);
+            try { pictureBox.Image = new Bitmap(PictureWidth, PictureHeight); }
+            catch { }
 
             //---------- Инструменты отрисовки
             Graphics graphics = Graphics.FromImage(pictureBox.Image);
@@ -66,8 +67,6 @@ namespace TestTask
                     x = 0;
                 graphics.FillRectangle(solidBrush, x, y, squareSize, squareSize);
             }
-
-
             pictureBox.Refresh();
         }
 

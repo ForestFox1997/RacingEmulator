@@ -84,7 +84,7 @@
             this.lbVehicles.FormattingEnabled = true;
             this.lbVehicles.Location = new System.Drawing.Point(25, 29);
             this.lbVehicles.Name = "lbVehicles";
-            this.lbVehicles.Size = new System.Drawing.Size(206, 264);
+            this.lbVehicles.Size = new System.Drawing.Size(315, 264);
             this.lbVehicles.TabIndex = 3;
             // 
             // groupBox1
@@ -104,7 +104,7 @@
             this.groupBox1.Controls.Add(this.nudPeopleCount);
             this.groupBox1.Location = new System.Drawing.Point(25, 351);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 313);
+            this.groupBox1.Size = new System.Drawing.Size(229, 313);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Добавить транспортное средство";
@@ -189,7 +189,7 @@
             this.nudVehicleSpeed.Size = new System.Drawing.Size(130, 20);
             this.nudVehicleSpeed.TabIndex = 8;
             this.nudVehicleSpeed.Value = new decimal(new int[] {
-            1,
+            50,
             0,
             0,
             0});
@@ -223,7 +223,7 @@
             // 
             // btnRemoveVehicle
             // 
-            this.btnRemoveVehicle.Location = new System.Drawing.Point(61, 307);
+            this.btnRemoveVehicle.Location = new System.Drawing.Point(61, 310);
             this.btnRemoveVehicle.Name = "btnRemoveVehicle";
             this.btnRemoveVehicle.Size = new System.Drawing.Size(135, 29);
             this.btnRemoveVehicle.TabIndex = 6;
@@ -233,22 +233,22 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(622, 523);
+            this.btnGo.Location = new System.Drawing.Point(766, 576);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(135, 29);
             this.btnGo.TabIndex = 7;
-            this.btnGo.Text = "поїхали";
+            this.btnGo.Text = "Начать гонку!";
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // tbRacingStats
             // 
-            this.tbRacingStats.Location = new System.Drawing.Point(811, 568);
+            this.tbRacingStats.Location = new System.Drawing.Point(859, 627);
             this.tbRacingStats.Multiline = true;
             this.tbRacingStats.Name = "tbRacingStats";
             this.tbRacingStats.ReadOnly = true;
             this.tbRacingStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbRacingStats.Size = new System.Drawing.Size(476, 226);
+            this.tbRacingStats.Size = new System.Drawing.Size(476, 254);
             this.tbRacingStats.TabIndex = 8;
             // 
             // pictureBox
@@ -257,9 +257,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox.Location = new System.Drawing.Point(299, 17);
+            this.pictureBox.Location = new System.Drawing.Point(377, 12);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(1003, 480);
+            this.pictureBox.Size = new System.Drawing.Size(958, 545);
             this.pictureBox.TabIndex = 9;
             this.pictureBox.TabStop = false;
             // 
@@ -274,7 +274,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(25, 685);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 212);
+            this.groupBox2.Size = new System.Drawing.Size(223, 212);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры моделирования";
@@ -301,7 +301,7 @@
             this.nudMaxTimeToChangeWheel.Size = new System.Drawing.Size(73, 20);
             this.nudMaxTimeToChangeWheel.TabIndex = 14;
             this.nudMaxTimeToChangeWheel.Value = new decimal(new int[] {
-            1000,
+            2000,
             0,
             0,
             0});
@@ -329,7 +329,7 @@
             this.nudMinTimeToChangeWheel.Size = new System.Drawing.Size(73, 20);
             this.nudMinTimeToChangeWheel.TabIndex = 13;
             this.nudMinTimeToChangeWheel.Value = new decimal(new int[] {
-            500,
+            1500,
             0,
             0,
             0});
@@ -411,12 +411,12 @@
             // 
             // tbVehiclesStats
             // 
-            this.tbVehiclesStats.Location = new System.Drawing.Point(314, 568);
+            this.tbVehiclesStats.Location = new System.Drawing.Point(377, 627);
             this.tbVehiclesStats.Multiline = true;
             this.tbVehiclesStats.Name = "tbVehiclesStats";
             this.tbVehiclesStats.ReadOnly = true;
             this.tbVehiclesStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbVehiclesStats.Size = new System.Drawing.Size(476, 226);
+            this.tbVehiclesStats.Size = new System.Drawing.Size(476, 254);
             this.tbVehiclesStats.TabIndex = 11;
             // 
             // nudPeopleCount
@@ -492,7 +492,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox);
             this.Name = "MainForm";
-            this.Text = "Main Form";
+            this.Text = "Симулятор гонок";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
