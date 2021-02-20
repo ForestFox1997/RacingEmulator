@@ -42,7 +42,7 @@
             this.btnAddVehicle = new System.Windows.Forms.Button();
             this.btnRemoveVehicle = new System.Windows.Forms.Button();
             this.btnGo = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbRacingStats = new System.Windows.Forms.TextBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nudMaxTimeToChangeWheel = new System.Windows.Forms.NumericUpDown();
@@ -52,6 +52,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.nudSimulationSpeed = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
+            this.tbVehiclesStats = new System.Windows.Forms.TextBox();
+            this.nudPeopleCount = new System.Windows.Forms.NumericUpDown();
+            this.nudCargoWeight = new System.Windows.Forms.NumericUpDown();
+            this.cbSidecarAvailability = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelPunctureProbability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVehicleSpeed)).BeginInit();
@@ -61,6 +66,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMinTimeToChangeWheel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSimulationSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPeopleCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCargoWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -82,6 +89,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cbVehicleTypes);
             this.groupBox1.Controls.Add(this.label5);
@@ -91,9 +99,12 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cbVehicleColors);
             this.groupBox1.Controls.Add(this.btnAddVehicle);
+            this.groupBox1.Controls.Add(this.nudCargoWeight);
+            this.groupBox1.Controls.Add(this.cbSidecarAvailability);
+            this.groupBox1.Controls.Add(this.nudPeopleCount);
             this.groupBox1.Location = new System.Drawing.Point(25, 351);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 264);
+            this.groupBox1.Size = new System.Drawing.Size(206, 313);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Добавить транспортное средство";
@@ -118,6 +129,7 @@
             this.cbVehicleTypes.Name = "cbVehicleTypes";
             this.cbVehicleTypes.Size = new System.Drawing.Size(130, 21);
             this.cbVehicleTypes.TabIndex = 12;
+            this.cbVehicleTypes.SelectedValueChanged += new System.EventHandler(this.cbVehicleTypes_SelectedValueChanged);
             // 
             // label5
             // 
@@ -201,7 +213,7 @@
             // 
             // btnAddVehicle
             // 
-            this.btnAddVehicle.Location = new System.Drawing.Point(36, 218);
+            this.btnAddVehicle.Location = new System.Drawing.Point(36, 269);
             this.btnAddVehicle.Name = "btnAddVehicle";
             this.btnAddVehicle.Size = new System.Drawing.Size(135, 29);
             this.btnAddVehicle.TabIndex = 5;
@@ -229,15 +241,15 @@
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
-            // textBox1
+            // tbRacingStats
             // 
-            this.textBox1.Location = new System.Drawing.Point(266, 607);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(854, 196);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "Для вывода результатов!\r\n\r\n";
+            this.tbRacingStats.Location = new System.Drawing.Point(811, 568);
+            this.tbRacingStats.Multiline = true;
+            this.tbRacingStats.Name = "tbRacingStats";
+            this.tbRacingStats.ReadOnly = true;
+            this.tbRacingStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbRacingStats.Size = new System.Drawing.Size(476, 226);
+            this.tbRacingStats.TabIndex = 8;
             // 
             // pictureBox
             // 
@@ -247,7 +259,7 @@
             this.pictureBox.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox.Location = new System.Drawing.Point(299, 17);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(800, 480);
+            this.pictureBox.Size = new System.Drawing.Size(1003, 480);
             this.pictureBox.TabIndex = 9;
             this.pictureBox.TabStop = false;
             // 
@@ -260,9 +272,9 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.nudDistance);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(25, 633);
+            this.groupBox2.Location = new System.Drawing.Point(25, 685);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 239);
+            this.groupBox2.Size = new System.Drawing.Size(200, 212);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры моделирования";
@@ -289,7 +301,7 @@
             this.nudMaxTimeToChangeWheel.Size = new System.Drawing.Size(73, 20);
             this.nudMaxTimeToChangeWheel.TabIndex = 14;
             this.nudMaxTimeToChangeWheel.Value = new decimal(new int[] {
-            400,
+            1000,
             0,
             0,
             0});
@@ -317,7 +329,7 @@
             this.nudMinTimeToChangeWheel.Size = new System.Drawing.Size(73, 20);
             this.nudMinTimeToChangeWheel.TabIndex = 13;
             this.nudMinTimeToChangeWheel.Value = new decimal(new int[] {
-            200,
+            500,
             0,
             0,
             0});
@@ -397,13 +409,82 @@
             this.label8.TabIndex = 15;
             this.label8.Text = "Коэффициент замедления \r\nскорости моделирования, %";
             // 
+            // tbVehiclesStats
+            // 
+            this.tbVehiclesStats.Location = new System.Drawing.Point(314, 568);
+            this.tbVehiclesStats.Multiline = true;
+            this.tbVehiclesStats.Name = "tbVehiclesStats";
+            this.tbVehiclesStats.ReadOnly = true;
+            this.tbVehiclesStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbVehiclesStats.Size = new System.Drawing.Size(476, 226);
+            this.tbVehiclesStats.TabIndex = 11;
+            // 
+            // nudPeopleCount
+            // 
+            this.nudPeopleCount.Location = new System.Drawing.Point(19, 230);
+            this.nudPeopleCount.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.nudPeopleCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudPeopleCount.Name = "nudPeopleCount";
+            this.nudPeopleCount.Size = new System.Drawing.Size(130, 20);
+            this.nudPeopleCount.TabIndex = 12;
+            this.nudPeopleCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nudCargoWeight
+            // 
+            this.nudCargoWeight.Location = new System.Drawing.Point(19, 230);
+            this.nudCargoWeight.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudCargoWeight.Name = "nudCargoWeight";
+            this.nudCargoWeight.Size = new System.Drawing.Size(130, 20);
+            this.nudCargoWeight.TabIndex = 13;
+            this.nudCargoWeight.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // cbSidecarAvailability
+            // 
+            this.cbSidecarAvailability.AutoSize = true;
+            this.cbSidecarAvailability.Location = new System.Drawing.Point(40, 231);
+            this.cbSidecarAvailability.Name = "cbSidecarAvailability";
+            this.cbSidecarAvailability.Size = new System.Drawing.Size(114, 17);
+            this.cbSidecarAvailability.TabIndex = 14;
+            this.cbSidecarAvailability.Text = "Наличие коляски";
+            this.cbSidecarAvailability.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 214);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(147, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Дополнительный параметр";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 909);
+            this.ClientSize = new System.Drawing.Size(1353, 909);
+            this.Controls.Add(this.tbVehiclesStats);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbRacingStats);
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnRemoveVehicle);
@@ -424,6 +505,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMinTimeToChangeWheel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSimulationSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPeopleCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCargoWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,7 +527,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbVehicleTypes;
         private System.Windows.Forms.Button btnGo;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbRacingStats;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label7;
@@ -454,6 +537,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nudSimulationSpeed;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tbVehiclesStats;
+        private System.Windows.Forms.CheckBox cbSidecarAvailability;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown nudPeopleCount;
+        private System.Windows.Forms.NumericUpDown nudCargoWeight;
     }
 }
 

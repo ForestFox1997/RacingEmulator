@@ -11,13 +11,14 @@ namespace TestTask.RacingLogic
     /// <summary> Класс транспортного средства, учавствующего в гонке </summary>
     class Vehicle
     {
-        public Vehicle(VehicleType vehicleType, int vehicleSpeed, double wheelPunctureProbability, ColorEnumeration venicleColor)
+        public Vehicle(VehicleType vehicleType, int vehicleSpeed, double wheelPunctureProbability, ColorEnumeration venicleColor, string additionalParameter)
         {
             TypeOfVehicle = vehicleType;
             VehicleSpeed = vehicleSpeed;
             LuckRate = wheelPunctureProbability;
             VehicleColor = venicleColor;
             VehicleColorName = venicleColor.ToString();
+            AdditionalParameter = additionalParameter;
         }
 
         /// <summary> Тип транспортного средства </summary>
@@ -50,6 +51,8 @@ namespace TestTask.RacingLogic
         public ColorEnumeration VehicleColor { get; set; }
 
         public string VehicleColorName { get; set; }
+
+        public string AdditionalParameter { get; set; }
 
         public void SetDistanceToFinish(double distance) => _remainingDistanceToFinish = distance;
         public double RemainingDistanceToFinish
@@ -85,14 +88,25 @@ namespace TestTask.RacingLogic
 
         public override string ToString()
         {
-            string vehicleType = string.Empty;
+            string vehicleType = "";
+            string additionalParemeter = "";
             if (TypeOfVehicle == VehicleType.Truck)
+            {
                 vehicleType = "Грузовик";
+                additionalParemeter = " Везет " + AdditionalParameter + " единиц веса";
+            }
             else if (TypeOfVehicle == VehicleType.PassengerCar)
+            {
                 vehicleType = "Легковое авто";
+                additionalParemeter = "Везет " + AdditionalParameter + " пассажира(ов)";
+            }
             else if (TypeOfVehicle == VehicleType.Motorcycle)
+            {
                 vehicleType = "Мотоцикл";
-            return vehicleType + ", " + VehicleColorName + ", " + VehicleSpeed + " / " + LuckRate;
+                additionalParemeter = Convert.ToBoolean(AdditionalParameter) ? " Имеет коляску" : " Не имеет коляски";
+            }
+
+            return vehicleType + ", " + VehicleColorName + ", " + VehicleSpeed + " / " + LuckRate + "," + additionalParemeter;
         }
     }
 }

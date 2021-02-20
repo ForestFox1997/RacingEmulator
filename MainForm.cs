@@ -56,8 +56,15 @@ namespace TestTask
                 vehicleType = Vehicle.VehicleType.PassengerCar;
             else if (cbVehicleTypes.SelectedItem.ToString() == "Мотоцикл")
                 vehicleType = Vehicle.VehicleType.Motorcycle;
+            string additionalParameter = "";
+            if (vehicleType == Vehicle.VehicleType.Truck)
+                additionalParameter = nudCargoWeight.Value.ToString();
+            else if (vehicleType == Vehicle.VehicleType.Motorcycle)
+                additionalParameter = cbSidecarAvailability.Checked.ToString();
+            else if (vehicleType == Vehicle.VehicleType.PassengerCar)
+                additionalParameter = nudPeopleCount.Value.ToString();
             var vehicle = new Vehicle(vehicleType, Convert.ToInt32(nudVehicleSpeed.Value), Convert.ToDouble(nudWheelPunctureProbability.Value),
-                (ColorEnumeration)Enum.Parse(typeof(ColorEnumeration), cbVehicleColors.SelectedItem.ToString()));
+                (ColorEnumeration)Enum.Parse(typeof(ColorEnumeration), cbVehicleColors.SelectedItem.ToString()), additionalParameter);
             vehicles.Add(vehicle);
             VehicleCollectionIsChanged();
         }
@@ -70,17 +77,27 @@ namespace TestTask
 
         private async void btnGo_Click(object sender, EventArgs e)
         {
-            textBox1.Text += Statistics.GetResult(Statistics.RaceCondition.start);
+            tbVehiclesStats.Text = Statistics.GetResult(Statistics.RaceCondition.start);
             await Task.Run(() => {
                 if (vehicles.Count != 0)
                 {
-                    btnGo.Invoke((MethodInvoker)delegate { btnGo.Enabled = false; }); 
+                    Invoke((MethodInvoker)delegate {
+                        nudDistance.Enabled = false;
+                        btnGo.Enabled = false;
+                        btnRemoveVehicle.Enabled = false;
+                        btnAddVehicle.Enabled = false;
+                    });
                     var raceCondition = new RaceCondition();
                     raceCondition.RaceConditionIsChanged += DisplayChangedRaceCondition;
                     raceCondition.StartRace();
 
-                    textBox1.Invoke((MethodInvoker)delegate { textBox1.Text += "Гонка завершена!"; });
-                    btnGo.Invoke((MethodInvoker)delegate { btnGo.Enabled = true; });
+                    tbRacingStats.Invoke((MethodInvoker)delegate { tbRacingStats.Text += "Гонка завершена!"; });
+                    Invoke((MethodInvoker)delegate {
+                        nudDistance.Enabled = true;
+                        btnGo.Enabled = true;
+                        btnRemoveVehicle.Enabled = true;
+                        btnAddVehicle.Enabled = true;
+                    });
                 }
 
             });
@@ -92,9 +109,9 @@ namespace TestTask
 
             var currentCondition = vehicles;
             
-            textBox1.Invoke((MethodInvoker)delegate {
+            tbRacingStats.Invoke((MethodInvoker)delegate {
                 string condition = Statistics.GetResult(Statistics.RaceCondition.continues);
-                textBox1.Text += condition + Environment.NewLine;
+                tbRacingStats.Text = condition + Environment.NewLine;
                 //textBox1.Text += vehicles[0].RemainingDistanceToFinish + Environment.NewLine;
 
                 pictureBox.Invoke((MethodInvoker)delegate { picture.DrawPicture(pictureBox); });
@@ -124,5 +141,30 @@ namespace TestTask
             Parameters.DistanceUnits = (int)nudDistance.Value;
         }
         #endregion Настройка параметров
+
+        private void cbVehicleTypes_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cbVehicleTypes.SelectedItem.ToString() == "Грузовик")
+            {
+                label9.Text = "Вес груза";
+                nudCargoWeight.Visible = true;
+                nudPeopleCount.Visible = false;
+                cbSidecarAvailability.Visible = false;
+            }
+            else if (cbVehicleTypes.SelectedItem.ToString() == "Легковое авто")
+            {
+                label9.Text = "Количество людей";
+                nudCargoWeight.Visible = false;
+                nudPeopleCount.Visible = true;
+                cbSidecarAvailability.Visible = false;
+            }
+            else if (cbVehicleTypes.SelectedItem.ToString() == "Мотоцикл")
+            {
+                label9.Text = "";
+                nudCargoWeight.Visible = false;
+                nudPeopleCount.Visible = false;
+                cbSidecarAvailability.Visible = true;
+            }
+        }
     }
 }

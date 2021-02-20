@@ -20,7 +20,7 @@ namespace TestTask.RacingLogic
                 finishers = new List<Vehicle>();
                 string _vehicles = "";
                 for(int i = 0; i < vehicles.Count; i++)
-                    _vehicles += vehicles[i].ToString() + ", под номером" + (i + 1) + ";" + Environment.NewLine;
+                    _vehicles += vehicles[i].ToString() + ": под номером " + (i + 1) + ";" + Environment.NewLine;
                 return "В гонке учавствуют " + vehicles.Count + " транспортных средств(а):" 
                     + Environment.NewLine + _vehicles + Environment.NewLine;
             }
@@ -28,9 +28,6 @@ namespace TestTask.RacingLogic
             {
                 UpdateFinishersList();
                 string _stats = "";
-                //for (int j = 0; j < vehicles.Count; j++)
-                //    if (vehicles[j].RemainingDistanceToFinish == 0)
-                //        stats[j].IsFinished = true;
                 for (int i = 0; i < vehicles.Count; i++)
                 {
                     if (vehicles[i].RemainingDistanceToFinish == 0)
@@ -65,17 +62,6 @@ namespace TestTask.RacingLogic
                 if (vehicle.RemainingDistanceToFinish == 0 && !finishers.Contains(vehicle))
                     finishers.Add(vehicle);
         }
-
-        //private static List<Stats> stats;
-
-        //private class Stats
-        //{
-        //    public int ParticipantNumber;
-        //    public bool WheelIsPunctured;
-        //    public int CountOfWheelPunctures;
-        //    public bool IsFinished;
-        //    public int FinishedWithNumber;
-        //}
 
         public enum RaceCondition { start, continues, finish }
 

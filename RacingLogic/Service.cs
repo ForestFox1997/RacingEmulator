@@ -33,11 +33,5 @@ namespace TestTask.RacingLogic
 
         }
 
-
-
-
-
-
-
     }
 }
