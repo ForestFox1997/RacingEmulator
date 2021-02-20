@@ -74,11 +74,13 @@ namespace TestTask
             await Task.Run(() => {
                 if (vehicles.Count != 0)
                 {
+                    btnGo.Invoke((MethodInvoker)delegate { btnGo.Enabled = false; }); 
                     var raceCondition = new RaceCondition();
                     raceCondition.RaceConditionIsChanged += DisplayChangedRaceCondition;
                     raceCondition.StartRace();
 
                     textBox1.Invoke((MethodInvoker)delegate { textBox1.Text += "Гонка завершена!"; });
+                    btnGo.Invoke((MethodInvoker)delegate { btnGo.Enabled = true; });
                 }
 
             });

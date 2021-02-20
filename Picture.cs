@@ -45,15 +45,26 @@ namespace TestTask
                 graphics.DrawLine(pen, new Point(PictureWidth, y), new Point(0, y));
             }
 
+            //---------- Отрисовать финишную черту
+            for (int i = 0; i < 2; i++)
+            {
+                int width = (int)(PictureWidth * 0.05);
+
+
+            }
+
             //---------- Отрисовать ТС на линии движения
             for (int i = 0; i < vehicles.Count; i++)
             {
                 double distanceCompleted = percentageOfDistanceTraveled[i];
                 Color vehicleColor = GetColor(vehicles[i].VehicleColor);
                 int x = (int)(PictureWidth * distanceCompleted / 100);
-                int y = (PictureHeight / (vehicles.Count + 1) * (i + 1)) - (int)(PictureHeight * 0.005);
+                //if (x - )
+                int y = (PictureHeight / (vehicles.Count + 1) * (i + 1)) - (int)(PictureHeight * 0.025);
                 solidBrush.Color = vehicleColor;
                 int squareSize = (int)(PictureHeight * 0.05);
+                if (x > (x - squareSize))
+                    x -= squareSize;
                 graphics.FillRectangle(solidBrush, x, y, squareSize, squareSize);
             }
 
